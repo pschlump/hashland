@@ -12,25 +12,26 @@ import (
 	"fmt"
 	"hash"
 	"io"
-	. "leb.io/hashland/hashf"     // cleaved
-	. "leb.io/hashland/hashtable" // cleaved
-	"leb.io/hashland/nhash"
-	"leb.io/hashland/smhasher"
-	"leb.io/hrff"
 	_ "math"
 	"math/rand"
 	"os"
 	"sort"
 	"time"
 
+	"github.com/hrff"
+	. "github.com/pschlump/hashland/hashf"     // cleaved
+	. "github.com/pschlump/hashland/hashtable" // cleaved
+	"github.com/pschlump/hashland/nhash"
+	"github.com/pschlump/hashland/smhasher"
+
 	// remove these at some point
-	"leb.io/aeshash"           // remove
-	"leb.io/hashland/gomap"    // remove
-	"leb.io/hashland/jenkins"  // remove
-	"leb.io/hashland/keccak"   // remove
-	"leb.io/hashland/keccakpg" // remove
-	"leb.io/hashland/nullhash" // remove
-	"leb.io/hashland/siphash"  // remove
+	// PJS 	"github.com/aeshash"           // remove
+	"github.com/pschlump/hashland/gomap"    // remove
+	"github.com/pschlump/hashland/jenkins"  // remove
+	"github.com/pschlump/hashland/keccak"   // remove
+	"github.com/pschlump/hashland/keccakpg" // remove
+	"github.com/pschlump/hashland/nullhash" // remove
+	"github.com/pschlump/hashland/siphash"  // remove
 )
 
 func ReadFile(file string, cb func(line string)) int {
@@ -474,14 +475,14 @@ func benchmark32s(n int) {
 		//fmt.Printf("benchmark32s: gen n=%d, n=%h, keySize=%d, size=%h\n", n, pn, ksiz, ps)
 		if false {
 			_ = gomap.Hash64(bs, 0)
-			_ = aeshash.Hash(bs, 0)
+			// PJS 			_ = aeshash.Hash(bs, 0)
 		}
 		start, stop := time.Now(), time.Now()
 		switch ksiz {
 		case 4:
 			start = time.Now()
 			for i := 0; i < n; i++ {
-				_ = aeshash.Hash(bs, 0)
+				// PJS 				_ = aeshash.Hash(bs, 0)
 				// sha1160.Reset()
 				// sha1160.Write(bs)
 				// fp20 = fp20[0:0]
@@ -517,7 +518,7 @@ func benchmark32s(n int) {
 				// fp20 = sha1160.Sum(fp20)
 				// _ = uint64(fp20[0])<<56 | uint64(fp20[1])<<48 | uint64(fp20[2])<<40 | uint64(fp20[3])<<32 |
 				// 	uint64(fp20[4])<<24 | uint64(fp20[5])<<16 | uint64(fp20[6])<<8  | uint64(fp20[7])<<0
-				_ = aeshash.Hash(bs, 0)
+				// PJS 				_ = aeshash.Hash(bs, 0)
 				//k224.Reset()
 				//k224.Write(bs)
 				//_ = k224.Sum(nil)
@@ -929,7 +930,7 @@ func init() {
 	_, _ = jenkins.Jenkins364(bs, 0, 0, 0)
 	_ = jenkins.Hash232(bs, 0)
 	_, _ = jenkins.Jenkins364(bs, 0, 0, 0)
-	_ = aeshash.Hash(bs, 0)
+	// PJS 	_ = aeshash.Hash(bs, 0)
 	_ = siphash.Hash(0, 0, bs)
 	nh = nullhash.New()
 	nhf64 = nullhash.NewF64()
